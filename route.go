@@ -3,9 +3,9 @@ package main
 import (
 	"net/http"
 
-	"github.com/Mnshah219/go_net_http/auth"
-	"github.com/Mnshah219/go_net_http/middleware"
 	"github.com/justinas/alice"
+	"github.com/mnshah219/go_net_http/auth"
+	"github.com/mnshah219/go_net_http/middleware"
 )
 
 func registerRoutes() *http.ServeMux {
