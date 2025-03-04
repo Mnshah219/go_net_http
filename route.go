@@ -9,9 +9,10 @@ import (
 )
 
 func registerRoutes() *http.ServeMux {
-	middlewareChain := alice.New(middleware.LoggingMiddleware, middleware.RecoveryMiddleware)
-
+	middlewareChain := alice.New(middleware.RecoveryMiddleware, middleware.LoggingMiddleware)
+	authMiddlewareChain := middlewareChain.Append(middleware.AuthMiddleware)
 	router := http.NewServeMux()
 	router.Handle("/auth/", middlewareChain.Then(http.StripPrefix("/auth", auth.RegisterRoutes())))
+	router.Handle("/feature/", authMiddlewareChain.Then(http.StripPrefix("/feature", auth.RegisterRoutes())))
 	return router
 }
